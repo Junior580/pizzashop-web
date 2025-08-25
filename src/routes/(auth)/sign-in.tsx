@@ -7,9 +7,10 @@ import { toast } from 'sonner'
 import { z } from 'zod'
 import { Label } from '@/components/ui/label'
 import { Input } from '@/components/ui/input'
+import { signIn } from '@/api/sign-in'
 
 const signInSchema = z.object({
-  email: z.string().optional(),
+  email: z.email(),
 })
 
 type SignInSchema = z.infer<typeof signInSchema>
@@ -34,7 +35,7 @@ function SignIn() {
   })
 
   const { mutateAsync: authenticate } = useMutation({
-    mutationFn: async () => {},
+    mutationFn: signIn,
   })
 
   async function handleAuthenticate({ email }: SignInSchema) {
@@ -47,7 +48,7 @@ function SignIn() {
           onClick: () => authenticate({ email }),
         },
       })
-    } catch (err) {
+    } catch {
       toast.error('Credenciais inválidas')
     }
   }

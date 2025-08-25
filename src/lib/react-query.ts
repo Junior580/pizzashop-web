@@ -1,4 +1,5 @@
 import { QueryClient } from '@tanstack/react-query'
+import { isAxiosError } from 'axios'
 import { toast } from 'sonner'
 
 let displayedNetworkFailureError = false
@@ -30,13 +31,14 @@ export const queryClient = new QueryClient({
     mutations: {
       onError(error) {
         console.log(error)
-        // if (isAxiosError(error)) {
-        //   if ('message' in error.response?.data) {
-        //     toast.error(error.response?.data.message)
-        //   } else {
-        //     toast.error('Erro ao processar operação!')
-        //   }
-        // }
+        if (isAxiosError(error)) {
+          const message = error.response?.data?.message
+          if (message) {
+            toast.error(error.response?.data.message)
+          } else {
+            toast.error('Erro ao processar operação!')
+          }
+        }
       },
     },
   },
