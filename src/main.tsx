@@ -1,12 +1,13 @@
+import './index.css'
+
+import { QueryClientProvider } from '@tanstack/react-query'
+import { createRouter, RouterProvider } from '@tanstack/react-router'
 import { StrictMode } from 'react'
 import ReactDOM from 'react-dom/client'
-import { RouterProvider, createRouter } from '@tanstack/react-router'
-
-import { routeTree } from './routeTree.gen'
-import { QueryClientProvider } from '@tanstack/react-query'
-import { queryClient } from './lib/react-query'
 import { Toaster } from 'sonner'
-import './index.css'
+
+import { queryClient } from './lib/react-query'
+import { routeTree } from './routeTree.gen'
 
 const router = createRouter({ routeTree })
 
