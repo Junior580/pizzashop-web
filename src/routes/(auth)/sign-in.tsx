@@ -10,7 +10,7 @@ import { Input } from '@/components/ui/input'
 import { signIn } from '@/api/sign-in'
 
 const signInSchema = z.object({
-  email: z.email(),
+  email: z.email().optional(),
 })
 
 type SignInSchema = z.infer<typeof signInSchema>
@@ -40,6 +40,8 @@ function SignIn() {
 
   async function handleAuthenticate({ email }: SignInSchema) {
     try {
+      if (!email) return
+
       await authenticate({ email })
 
       toast.success('Enviamos um link de autenticação para seu e-mail.', {
