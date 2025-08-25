@@ -16,7 +16,7 @@ const signInSchema = z.object({
 
 type SignInSchema = z.infer<typeof signInSchema>
 
-export const Route = createFileRoute('/(auth)/sign-in')({
+export const Route = createFileRoute('/_auth/sign-in')({
   validateSearch: signInSchema,
   component: SignIn,
 })
