@@ -1,13 +1,14 @@
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useMutation } from '@tanstack/react-query'
-import { createFileRoute } from '@tanstack/react-router'
+import { createFileRoute, Link } from '@tanstack/react-router'
 import { useNavigate } from '@tanstack/react-router'
 import { useForm } from 'react-hook-form'
 import { toast } from 'sonner'
+import { twMerge } from 'tailwind-merge'
 import { z } from 'zod'
 
 import { registerRestaurant } from '@/api/register-restaurant'
-import { Button } from '@/components/ui/button'
+import { Button, buttonVariants } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 
@@ -20,7 +21,7 @@ const signUpSchema = z.object({
 
 type SignUpSchema = z.infer<typeof signUpSchema>
 
-export const Route = createFileRoute('/(auth)/sign-up')({
+export const Route = createFileRoute('/(auth)/_auth/sign-up')({
   component: SignUp,
 })
 
@@ -63,9 +64,15 @@ function SignUp() {
 
   return (
     <div className="lg:p-8">
-      <Button asChild variant={'ghost'}>
-        <a href="/sign-in">Fazer login</a>
-      </Button>
+      <Link
+        to="/sign-in"
+        className={twMerge(
+          buttonVariants({ variant: 'ghost' }),
+          'absolute right-4 top-4 md:right-8 md:top-8',
+        )}
+      >
+        Fazer login
+      </Link>
 
       <div className="mx-auto flex w-full flex-col justify-center space-y-6 sm:w-[350px]">
         <div className="flex flex-col space-y-2 text-center">
