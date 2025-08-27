@@ -1,8 +1,8 @@
-import { ClipboardList, Home, Pizza, Star, UtensilsCrossed } from 'lucide-react'
+import { Home, Pizza, UtensilsCrossed } from 'lucide-react'
 
 import { AccountMenu } from './account-menu'
 import { NavLink } from './nav-link'
-// import { ThemeToggle } from './theme-toggle'
+import { ThemeToggle } from './theme-toggle'
 import { Separator } from './ui/separator'
 
 export function Header() {
@@ -25,7 +25,7 @@ export function Header() {
         </nav>
 
         <div className="ml-auto flex items-center space-x-2">
-          {/* <ThemeToggle /> */}
+          <ThemeToggle />
           <AccountMenu />
         </div>
       </div>
