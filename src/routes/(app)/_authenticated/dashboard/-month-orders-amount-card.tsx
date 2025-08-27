@@ -4,7 +4,7 @@ import { Loader2, Utensils } from 'lucide-react'
 import { getMonthOrdersAmount } from '@/api/get-month-orders-amount'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 
-import { CardSkeleton } from './card-skeleton'
+import { CardSkeleton } from './-card-skeleton'
 
 export function MonthOrdersAmountCard() {
   const { data: monthOrdersAmount, isFetching: isLoadingMonthOrdersAmount } =

@@ -4,7 +4,7 @@ import { DollarSign, Loader2 } from 'lucide-react'
 import { getMonthCanceledOrdersAmount } from '@/api/get-month-canceled-orders-amount'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 
-import { CardSkeleton } from './card-skeleton'
+import { CardSkeleton } from './-card-skeleton'
 
 export function MonthCanceledOrdersAmountCard() {
   const {

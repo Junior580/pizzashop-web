@@ -4,7 +4,7 @@ import { DollarSign, Loader2 } from 'lucide-react'
 import { getMonthReceipt } from '@/api/get-month-receipt'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 
-import { CardSkeleton } from './card-skeleton'
+import { CardSkeleton } from './-card-skeleton'
 
 export function MonthReceiptCard() {
   const { data: monthReceipt, isFetching: isLoadingMonthReceipt } = useQuery({

@@ -1,12 +1,12 @@
 import { createFileRoute } from '@tanstack/react-router'
 import { Helmet } from 'react-helmet-async'
 
-import { DayOrdersAmountCard } from './day-orders-amount-card'
-import { MonthCanceledOrdersAmountCard } from './month-canceled-orders-amount-card'
-import { MonthOrdersAmountCard } from './month-orders-amount-card'
-import { MonthReceiptCard } from './month-receipt-card'
-import { PopularProductsChart } from './popular-products-chart'
-import { ReceiptChart } from './receipt-chart'
+import { DayOrdersAmountCard } from './-day-orders-amount-card'
+import { MonthCanceledOrdersAmountCard } from './-month-canceled-orders-amount-card'
+import { MonthOrdersAmountCard } from './-month-orders-amount-card'
+import { MonthReceiptCard } from './-month-receipt-card'
+import { PopularProductsChart } from './-popular-products-chart'
+import { ReceiptChart } from './-receipt-chart'
 
 export const Route = createFileRoute('/(app)/_authenticated/dashboard/')({
   component: DashboardPage,
