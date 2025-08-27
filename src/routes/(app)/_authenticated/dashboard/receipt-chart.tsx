@@ -2,7 +2,7 @@ import { useQuery } from '@tanstack/react-query'
 import { subDays } from 'date-fns'
 import { Loader2, XCircle } from 'lucide-react'
 import { useState } from 'react'
-import { DateRange } from 'react-day-picker'
+import { type DateRange } from 'react-day-picker'
 import {
   CartesianGrid,
   Line,
@@ -13,7 +13,7 @@ import {
   XAxis,
   YAxis,
 } from 'recharts'
-import { violet } from 'tailwindcss/colors'
+import colors from 'tailwindcss/colors'
 
 import { getDailyReceiptInPeriod } from '@/api/get-daily-receipt-in-period'
 import { Button } from '@/components/ui/button'
@@ -136,7 +136,7 @@ export function ReceiptChart() {
                     type="linear"
                     strokeWidth={2}
                     dataKey="receipt"
-                    stroke={violet['500']}
+                    stroke={colors.violet['500']}
                   />
 
                   <Tooltip cursor={false} content={<CustomTooltip />} />
@@ -149,7 +149,7 @@ export function ReceiptChart() {
                 </span>
                 <Button
                   variant="link"
-                  size="xs"
+                  size="lg"
                   className="text-violet-500 dark:text-violet-400"
                   onClick={handleResetPeriod}
                 >
@@ -166,7 +166,7 @@ export function ReceiptChart() {
             </span>
             <Button
               variant="link"
-              size="xs"
+              size="lg"
               className="text-violet-500 dark:text-violet-400"
               onClick={handleResetPeriod}
             >
