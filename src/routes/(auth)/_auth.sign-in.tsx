@@ -1,13 +1,15 @@
 import { zodResolver } from '@hookform/resolvers/zod'
-import { Button } from '@/components/ui/button'
 import { useMutation } from '@tanstack/react-query'
-import { createFileRoute } from '@tanstack/react-router'
+import { createFileRoute, Link } from '@tanstack/react-router'
 import { useForm } from 'react-hook-form'
 import { toast } from 'sonner'
+import { twMerge } from 'tailwind-merge'
 import { z } from 'zod'
-import { Label } from '@/components/ui/label'
-import { Input } from '@/components/ui/input'
+
 import { signIn } from '@/api/sign-in'
+import { Button, buttonVariants } from '@/components/ui/button'
+import { Input } from '@/components/ui/input'
+import { Label } from '@/components/ui/label'
 
 const signInSchema = z.object({
   email: z.email().optional(),
@@ -15,7 +17,7 @@ const signInSchema = z.object({
 
 type SignInSchema = z.infer<typeof signInSchema>
 
-export const Route = createFileRoute('/(auth)/sign-in')({
+export const Route = createFileRoute('/(auth)/_auth/sign-in')({
   validateSearch: signInSchema,
   component: SignIn,
 })
@@ -57,9 +59,15 @@ function SignIn() {
 
   return (
     <div className="lg:p-8">
-      <Button asChild variant={'ghost'}>
-        <a href="/sign-up">Novo estabelecimento</a>
-      </Button>
+      <Link
+        to="/sign-up"
+        className={twMerge(
+          buttonVariants({ variant: 'ghost' }),
+          'absolute right-4 top-4 md:right-8 md:top-8',
+        )}
+      >
+        Novo estabelecimento
+      </Link>
 
       <div className="mx-auto flex w-full flex-col justify-center space-y-6 sm:w-[350px]">
         <div className="flex flex-col space-y-2 text-center">
