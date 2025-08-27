@@ -1,0 +1,28 @@
+import { createFileRoute } from '@tanstack/react-router'
+
+export const Route = createFileRoute('/(app)/_authenticated/dashboard/')({
+  component: DashboardPage,
+})
+
+function DashboardPage() {
+  return (
+    <>
+      {/* <Helmet title="Dashboard" /> */}
+      <div className="flex flex-col gap-4">
+        <h1 className="text-3xl font-bold tracking-tight">Dashboard</h1>
+
+        <div className="grid grid-cols-4 gap-4">
+          {/*   <MonthReceiptCard /> */}
+          {/*   <MonthOrdersAmountCard /> */}
+          {/*   <DayOrdersAmountCard /> */}
+          {/*   <MonthCanceledOrdersAmountCard /> */}
+        </div>
+
+        <div className="grid grid-cols-9 gap-4">
+          {/* <ReceiptChart /> */}
+          {/* <PopularProductsChart /> */}
+        </div>
+      </div>
+    </>
+  )
+}

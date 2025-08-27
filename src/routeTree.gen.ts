@@ -16,14 +16,11 @@ import { Route as authAuthRouteImport } from './routes/(auth)/_auth'
 import { Route as appAuthenticatedRouteImport } from './routes/(app)/_authenticated'
 import { Route as authAuthSignUpRouteImport } from './routes/(auth)/_auth.sign-up'
 import { Route as authAuthSignInRouteImport } from './routes/(auth)/_auth.sign-in'
-import { Route as appAuthenticatedDashboardLayoutRouteImport } from './routes/(app)/_authenticated/dashboard/_layout'
-import { Route as appAuthenticatedDashboardLayoutIndexRouteImport } from './routes/(app)/_authenticated/dashboard/_layout.index'
+import { Route as appAuthenticatedOrdersIndexRouteImport } from './routes/(app)/_authenticated/orders/index'
+import { Route as appAuthenticatedDashboardIndexRouteImport } from './routes/(app)/_authenticated/dashboard/index'
 
 const authRouteImport = createFileRoute('/(auth)')()
 const appRouteImport = createFileRoute('/(app)')()
-const appAuthenticatedDashboardRouteImport = createFileRoute(
-  '/(app)/_authenticated/dashboard',
-)()
 
 const authRoute = authRouteImport.update({
   id: '/(auth)',
@@ -46,12 +43,6 @@ const appAuthenticatedRoute = appAuthenticatedRouteImport.update({
   id: '/_authenticated',
   getParentRoute: () => appRoute,
 } as any)
-const appAuthenticatedDashboardRoute =
-  appAuthenticatedDashboardRouteImport.update({
-    id: '/dashboard',
-    path: '/dashboard',
-    getParentRoute: () => appAuthenticatedRoute,
-  } as any)
 const authAuthSignUpRoute = authAuthSignUpRouteImport.update({
   id: '/sign-up',
   path: '/sign-up',
@@ -62,30 +53,32 @@ const authAuthSignInRoute = authAuthSignInRouteImport.update({
   path: '/sign-in',
   getParentRoute: () => authAuthRoute,
 } as any)
-const appAuthenticatedDashboardLayoutRoute =
-  appAuthenticatedDashboardLayoutRouteImport.update({
-    id: '/_layout',
-    getParentRoute: () => appAuthenticatedDashboardRoute,
+const appAuthenticatedOrdersIndexRoute =
+  appAuthenticatedOrdersIndexRouteImport.update({
+    id: '/orders/',
+    path: '/orders/',
+    getParentRoute: () => appAuthenticatedRoute,
   } as any)
-const appAuthenticatedDashboardLayoutIndexRoute =
-  appAuthenticatedDashboardLayoutIndexRouteImport.update({
-    id: '/',
-    path: '/',
-    getParentRoute: () => appAuthenticatedDashboardLayoutRoute,
+const appAuthenticatedDashboardIndexRoute =
+  appAuthenticatedDashboardIndexRouteImport.update({
+    id: '/dashboard/',
+    path: '/dashboard/',
+    getParentRoute: () => appAuthenticatedRoute,
   } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof authAuthRouteWithChildren
   '/sign-in': typeof authAuthSignInRoute
   '/sign-up': typeof authAuthSignUpRoute
-  '/dashboard': typeof appAuthenticatedDashboardLayoutRouteWithChildren
-  '/dashboard/': typeof appAuthenticatedDashboardLayoutIndexRoute
+  '/dashboard': typeof appAuthenticatedDashboardIndexRoute
+  '/orders': typeof appAuthenticatedOrdersIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof authAuthRouteWithChildren
   '/sign-in': typeof authAuthSignInRoute
   '/sign-up': typeof authAuthSignUpRoute
-  '/dashboard': typeof appAuthenticatedDashboardLayoutIndexRoute
+  '/dashboard': typeof appAuthenticatedDashboardIndexRoute
+  '/orders': typeof appAuthenticatedOrdersIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -96,15 +89,14 @@ export interface FileRoutesById {
   '/(auth)/_auth': typeof authAuthRouteWithChildren
   '/(auth)/_auth/sign-in': typeof authAuthSignInRoute
   '/(auth)/_auth/sign-up': typeof authAuthSignUpRoute
-  '/(app)/_authenticated/dashboard': typeof appAuthenticatedDashboardRouteWithChildren
-  '/(app)/_authenticated/dashboard/_layout': typeof appAuthenticatedDashboardLayoutRouteWithChildren
-  '/(app)/_authenticated/dashboard/_layout/': typeof appAuthenticatedDashboardLayoutIndexRoute
+  '/(app)/_authenticated/dashboard/': typeof appAuthenticatedDashboardIndexRoute
+  '/(app)/_authenticated/orders/': typeof appAuthenticatedOrdersIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/sign-in' | '/sign-up' | '/dashboard' | '/dashboard/'
+  fullPaths: '/' | '/sign-in' | '/sign-up' | '/dashboard' | '/orders'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/sign-in' | '/sign-up' | '/dashboard'
+  to: '/' | '/sign-in' | '/sign-up' | '/dashboard' | '/orders'
   id:
     | '__root__'
     | '/'
@@ -114,9 +106,8 @@ export interface FileRouteTypes {
     | '/(auth)/_auth'
     | '/(auth)/_auth/sign-in'
     | '/(auth)/_auth/sign-up'
-    | '/(app)/_authenticated/dashboard'
-    | '/(app)/_authenticated/dashboard/_layout'
-    | '/(app)/_authenticated/dashboard/_layout/'
+    | '/(app)/_authenticated/dashboard/'
+    | '/(app)/_authenticated/orders/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -162,13 +153,6 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof appAuthenticatedRouteImport
       parentRoute: typeof appRoute
     }
-    '/(app)/_authenticated/dashboard': {
-      id: '/(app)/_authenticated/dashboard'
-      path: '/dashboard'
-      fullPath: '/dashboard'
-      preLoaderRoute: typeof appAuthenticatedDashboardRouteImport
-      parentRoute: typeof appAuthenticatedRoute
-    }
     '/(auth)/_auth/sign-up': {
       id: '/(auth)/_auth/sign-up'
       path: '/sign-up'
@@ -183,59 +167,31 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof authAuthSignInRouteImport
       parentRoute: typeof authAuthRoute
     }
-    '/(app)/_authenticated/dashboard/_layout': {
-      id: '/(app)/_authenticated/dashboard/_layout'
+    '/(app)/_authenticated/orders/': {
+      id: '/(app)/_authenticated/orders/'
+      path: '/orders'
+      fullPath: '/orders'
+      preLoaderRoute: typeof appAuthenticatedOrdersIndexRouteImport
+      parentRoute: typeof appAuthenticatedRoute
+    }
+    '/(app)/_authenticated/dashboard/': {
+      id: '/(app)/_authenticated/dashboard/'
       path: '/dashboard'
       fullPath: '/dashboard'
-      preLoaderRoute: typeof appAuthenticatedDashboardLayoutRouteImport
-      parentRoute: typeof appAuthenticatedDashboardRoute
-    }
-    '/(app)/_authenticated/dashboard/_layout/': {
-      id: '/(app)/_authenticated/dashboard/_layout/'
-      path: '/'
-      fullPath: '/dashboard/'
-      preLoaderRoute: typeof appAuthenticatedDashboardLayoutIndexRouteImport
-      parentRoute: typeof appAuthenticatedDashboardLayoutRoute
+      preLoaderRoute: typeof appAuthenticatedDashboardIndexRouteImport
+      parentRoute: typeof appAuthenticatedRoute
     }
   }
 }
-
-interface appAuthenticatedDashboardLayoutRouteChildren {
-  appAuthenticatedDashboardLayoutIndexRoute: typeof appAuthenticatedDashboardLayoutIndexRoute
-}
-
-const appAuthenticatedDashboardLayoutRouteChildren: appAuthenticatedDashboardLayoutRouteChildren =
-  {
-    appAuthenticatedDashboardLayoutIndexRoute:
-      appAuthenticatedDashboardLayoutIndexRoute,
-  }
-
-const appAuthenticatedDashboardLayoutRouteWithChildren =
-  appAuthenticatedDashboardLayoutRoute._addFileChildren(
-    appAuthenticatedDashboardLayoutRouteChildren,
-  )
-
-interface appAuthenticatedDashboardRouteChildren {
-  appAuthenticatedDashboardLayoutRoute: typeof appAuthenticatedDashboardLayoutRouteWithChildren
-}
-
-const appAuthenticatedDashboardRouteChildren: appAuthenticatedDashboardRouteChildren =
-  {
-    appAuthenticatedDashboardLayoutRoute:
-      appAuthenticatedDashboardLayoutRouteWithChildren,
-  }
-
-const appAuthenticatedDashboardRouteWithChildren =
-  appAuthenticatedDashboardRoute._addFileChildren(
-    appAuthenticatedDashboardRouteChildren,
-  )
 
 interface appAuthenticatedRouteChildren {
-  appAuthenticatedDashboardRoute: typeof appAuthenticatedDashboardRouteWithChildren
+  appAuthenticatedDashboardIndexRoute: typeof appAuthenticatedDashboardIndexRoute
+  appAuthenticatedOrdersIndexRoute: typeof appAuthenticatedOrdersIndexRoute
 }
 
 const appAuthenticatedRouteChildren: appAuthenticatedRouteChildren = {
-  appAuthenticatedDashboardRoute: appAuthenticatedDashboardRouteWithChildren,
+  appAuthenticatedDashboardIndexRoute: appAuthenticatedDashboardIndexRoute,
+  appAuthenticatedOrdersIndexRoute: appAuthenticatedOrdersIndexRoute,
 }
 
 const appAuthenticatedRouteWithChildren =
