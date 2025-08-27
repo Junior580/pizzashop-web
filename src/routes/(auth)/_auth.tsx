@@ -1,7 +1,17 @@
-import { createFileRoute, Outlet } from '@tanstack/react-router'
+import { createFileRoute, Outlet, redirect } from '@tanstack/react-router'
 import { Pizza } from 'lucide-react'
 
+import { isAuthenticated } from '@/lib/auth'
+
 export const Route = createFileRoute('/(auth)/_auth')({
+  beforeLoad: async () => {
+    if (await isAuthenticated()) {
+      throw redirect({
+        to: '/dashboard',
+      })
+    }
+  },
+
   component: AuthLayout,
 })
 
