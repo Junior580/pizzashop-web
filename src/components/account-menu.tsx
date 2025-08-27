@@ -1,7 +1,7 @@
 import { useMutation, useQuery } from '@tanstack/react-query'
+import { useNavigate } from '@tanstack/react-router'
 import { Building, ChevronDown, LogOut } from 'lucide-react'
 
-// import { useNavigate } from 'react-router-dom'
 import { getManagedRestaurant } from '@/api/get-managed-restaurant'
 import { getProfile } from '@/api/get-profile'
 import { signOut } from '@/api/sign-out'
@@ -21,7 +21,7 @@ import {
 import { Skeleton } from './ui/skeleton'
 
 export function AccountMenu() {
-  // const navigate = useNavigate()
+  const navigate = useNavigate()
 
   const { data: profile, isLoading: isLoadingProfile } = useQuery({
     queryKey: ['me'],
@@ -39,7 +39,7 @@ export function AccountMenu() {
   const { isPending: isSigningOut, mutateAsync: handleSignOut } = useMutation({
     mutationFn: signOut,
     onSuccess: () => {
-      // navigate('/sign-in', { replace: true })
+      navigate({ to: '/sign-in', replace: true })
     },
   })
 
