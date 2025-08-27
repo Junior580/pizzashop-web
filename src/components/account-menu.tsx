@@ -6,7 +6,7 @@ import { getManagedRestaurant } from '@/api/get-managed-restaurant'
 import { getProfile } from '@/api/get-profile'
 import { signOut } from '@/api/sign-out'
 
-// import { StoreProfile } from './store-profile'
+import { StoreProfile } from './store-profile'
 import { Button } from './ui/button'
 import { Dialog, DialogTrigger } from './ui/dialog'
 import {
@@ -97,7 +97,7 @@ export function AccountMenu() {
         </DropdownMenuContent>
       </DropdownMenu>
 
-      {/* <StoreProfile /> */}
+      <StoreProfile />
     </Dialog>
   )
 }
